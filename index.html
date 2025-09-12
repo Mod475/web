@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>دائرة ألوان</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    div {
+      width: 400px;
+      height: 400px;
+      border-radius: 60%;
+      background: conic-gradient(
+        #ff6b6b 0deg 72deg, 
+        #ffd93d 72deg 144deg,
+
+        #6bcb77 144deg 216deg, 
+        #4d9cff 216deg 288deg,
+        #9b59b6 288deg 360deg
+      );
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+</body>
+</html>
