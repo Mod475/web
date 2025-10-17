@@ -1,570 +1,319 @@
+<!doctype html>
 
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كعكة عيد ميلاد أميمة الـ25</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            text-align: center;
-        }
-        
-        h1 {
-            color: #9c27b0;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        
-        .cake-container {
-            perspective: 1200px;
-            margin: 2rem auto;
-            width: 300px;
-            height: 400px;
-            position: relative;
-        }
-        
-        .cake {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 1s;
-            cursor: grab;
-        }
-        
-        .cake:active {
-            cursor: grabbing;
-        }
-        
-        .cake-layer {
-            position: absolute;
-            border-radius: 10px;
-            left: 50%;
-            transform-style: preserve-3d;
-            transform: translateX(-50%);
-        }
-        
-        /* الطبقة السفلية */
-        .layer-bottom {
-            width: 280px;
-            height: 80px;
-            bottom: 0;
-            background: linear-gradient(to bottom, #8e44ad, #9b59b6);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .layer-bottom::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to bottom, #a569bd, #8e44ad);
-            border-radius: 10px 10px 0 0;
-            top: -10px;
-        }
-        
-        /* الطبقة الوسطى */
-        .layer-middle {
-            width: 240px;
-            height: 70px;
-            bottom: 80px;
-            background: linear-gradient(to bottom, #e74c3c, #c0392b);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .layer-middle::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 15px;
-            background: linear-gradient(to bottom, #ec7063, #e74c3c);
-            border-radius: 10px 10px 0 0;
-            top: -7px;
-        }
-        
-        /* الطبقة العلوية */
-        .layer-top {
-            width: 200px;
-            height: 60px;
-            bottom: 150px;
-            background: linear-gradient(to bottom, #f1c40f, #f39c12);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .layer-top::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 12px;
-            background: linear-gradient(to bottom, #f7dc6f, #f1c40f);
-            border-radius: 10px 10px 0 0;
-            top: -6px;
-        }
-        
-        /* الكريمة */
-        .frosting {
-            position: absolute;
-            width: 100%;
-            height: 15px;
-            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
-            border-radius: 50%;
-            bottom: 210px;
-            left: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* الشموع */
-        .candles {
-            position: absolute;
-            bottom: 225px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-        }
-        
-        .candle {
-            width: 12px;
-            height: 40px;
-            background: linear-gradient(to right, #e74c3c, #c0392b, #e74c3c);
-            border-radius: 5px;
-            position: relative;
-            box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
-        }
-        
-        .candle:nth-child(2) {
-            background: linear-gradient(to right, #3498db, #2980b9, #3498db);
-            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-        }
-        
-        .candle:nth-child(3) {
-            background: linear-gradient(to right, #2ecc71, #27ae60, #2ecc71);
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
-        }
-        
-        .flame {
-            position: absolute;
-            width: 15px;
-            height: 25px;
-            background: linear-gradient(to bottom, #ffeb3b, #ff9800, #f44336);
-            border-radius: 50% 50% 20% 20%;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: flicker 1.5s infinite alternate;
-            box-shadow: 0 0 15px rgba(255, 152, 0, 0.7);
-        }
-        
-        @keyframes flicker {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.1) translateY(-2px); }
-        }
-        
-        /* النص على الكعكة */
-        .cake-text {
-            position: absolute;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            text-align: center;
-        }
-        
-        .name {
-            display: block;
-            font-size: 1.8rem;
-            color: #f1c40f;
-        }
-        
-        .age {
-            display: block;
-            font-size: 2.2rem;
-            color: #fff;
-            margin-top: 5px;
-        }
-        
-        /* الزينة */
-        .decoration {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #ffeb3b, #ff9800);
-            box-shadow: 0 0 10px rgba(255, 152, 0, 0.7);
-            animation: float 3s infinite ease-in-out;
-        }
-        
-        .decoration:nth-child(1) {
-            top: 50px;
-            left: 50px;
-            animation-delay: 0s;
-        }
-        
-        .decoration:nth-child(2) {
-            top: 80px;
-            right: 60px;
-            animation-delay: 0.5s;
-        }
-        
-        .decoration:nth-child(3) {
-            bottom: 120px;
-            left: 70px;
-            animation-delay: 1s;
-        }
-        
-        .decoration:nth-child(4) {
-            bottom: 90px;
-            right: 80px;
-            animation-delay: 1.5s;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        /* التحكم بالكعكة */
-        .controls {
-            margin: 2rem 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .rotation-controls {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        button {
-            background: linear-gradient(45deg, #9c27b0, #e91e63);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        button:active {
-            transform: translateY(1px);
-        }
-        
-        .auto-rotate {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .message {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .message h2 {
-            color: #9c27b0;
-            margin-bottom: 1rem;
-        }
-        
-        .message p {
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-        
-        /* تأثيرات النص */
-        .birthday-wish {
-            font-size: 1.5rem;
-            color: #e91e63;
-            margin: 1.5rem 0;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        /* التكيف مع الشاشات الصغيرة */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .cake-container {
-                width: 250px;
-                height: 350px;
-            }
-            
-            .layer-bottom {
-                width: 230px;
-            }
-            
-            .layer-middle {
-                width: 190px;
-            }
-            
-            .layer-top {
-                width: 150px;
-            }
-            
-            .cake-text {
-                font-size: 1.2rem;
-            }
-            
-            .name {
-                font-size: 1.5rem;
-            }
-            
-            .age {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>عيد ميلاد أميمة 25 — احتفال ثلاثي الأبعاد</title>
+  <style>
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family: "Tajawal", system-ui, Arial, sans-serif;background:#0b1020;color:#fff}/* Canvas container */
+#stage{position:fixed;inset:0;overflow:hidden}
+
+/* UI overlay */
+.overlay{
+  position:fixed;inset:18px;display:flex;flex-direction:column;gap:12px;pointer-events:none
+}
+.topbar{display:flex;justify-content:space-between;align-items:center;pointer-events:auto}
+.brand{background:linear-gradient(90deg,#ff9a9e,#fad0c4);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;font-size:18px}
+
+.card{background:rgba(255,255,255,0.06);backdrop-filter:blur(6px);padding:12px;border-radius:12px;pointer-events:auto}
+
+.title{font-size:20px;font-weight:800}
+.subtitle{opacity:0.85;font-size:13px}
+
+.controls{display:flex;gap:8px;align-items:center}
+button{appearance:none;border:0;padding:8px 12px;border-radius:10px;background:linear-gradient(180deg,#ffd27a,#ff9a2e);color:#111;font-weight:700;cursor:pointer}
+.ghost{background:rgba(255,255,255,0.08);color:#fff}
+
+.centerText{position:absolute;left:50%;top:12%;transform:translateX(-50%);text-align:center;pointer-events:auto}
+.centerText h1{font-size:36px;margin-bottom:6px}
+.centerText p{opacity:0.9}
+
+.footer{margin-top:auto;display:flex;gap:8px;align-items:center}
+
+/* Play button big */
+.playLarge{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);pointer-events:auto}
+
+/* small note for no-webgl */
+#no-webgl{display:none;padding:20px;background:#111;border-radius:12px}
+
+@media (max-width:720px){.centerText h1{font-size:24px}}
+
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>كعكة عيد ميلاد أميمة الـ25</h1>
-        <p class="subtitle">يمكنك تدوير الكعكة بالنقر عليها وسحبها في أي اتجاه</p>
-        
-        <div class="cake-container">
-            <div class="cake" id="cake">
-                <!-- طبقات الكعكة -->
-                <div class="cake-layer layer-bottom"></div>
-                <div class="cake-layer layer-middle"></div>
-                <div class="cake-layer layer-top"></div>
-                
-                <!-- الكريمة -->
-                <div class="frosting"></div>
-                
-                <!-- النص على الكعكة -->
-                <div class="cake-text">
-                    <span class="name">أميمة</span>
-                    <span class="age">25</span>
-                </div>
-                
-                <!-- الشموع -->
-                <div class="candles">
-                    <div class="candle">
-                        <div class="flame"></div>
-                    </div>
-                    <div class="candle">
-                        <div class="flame"></div>
-                    </div>
-                    <div class="candle">
-                        <div class="flame"></div>
-                    </div>
-                </div>
-                
-                <!-- الزينة -->
-                <div class="decoration"></div>
-                <div class="decoration"></div>
-                <div class="decoration"></div>
-                <div class="decoration"></div>
-            </div>
-        </div>
-        
-        <div class="birthday-wish">كل عام وأنتِ بألف خير!</div>
-        
-        <div class="controls">
-            <div class="rotation-controls">
-                <button id="rotateLeft"><i class="fas fa-undo"></i> تدوير لليسار</button>
-                <button id="resetRotation"><i class="fas fa-sync"></i> إعادة التعيين</button>
-                <button id="rotateRight"><i class="fas fa-redo"></i> تدوير لليمين</button>
-            </div>
-            
-            <div class="auto-rotate">
-                <input type="checkbox" id="autoRotate">
-                <label for="autoRotate">التدوير التلقائي</label>
-            </div>
-        </div>
-        
-        <div class="message">
-            <h2>تهانينا الحارة لأميمة!</h2>
-            <p>في عيد ميلادك الـ25، نتمنى لكِ سنة جديدة مليئة بالفرح والحب والنجاح. كل عام وأنتِ مصدر سعادة للجميع، وأيامك مليئة بالإنجازات والضحكات. نتمنى لكِ عيد ميلاد سعيدًا وأمنيات تتحقق!</p>
-        </div>
+  <div id="stage"></div>  <div class="overlay">
+    <div class="topbar">
+      <div class="card">
+        <div class="brand">🎉 احتفال أميمة - 25 سنة</div>
+        <div class="subtitle">صفحة تفاعلية ثلاثية الأبعاد قابلة للتخصيص</div>
+      </div><div class="controls">
+    <div class="card">
+      <label style="display:flex;gap:8px;align-items:center">
+        <span>لون الكعكة</span>
+        <input id="cakeColor" type="color" value="#ff9a9e">
+      </label>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cake = document.getElementById('cake');
-            const rotateLeftBtn = document.getElementById('rotateLeft');
-            const rotateRightBtn = document.getElementById('rotateRight');
-            const resetRotationBtn = document.getElementById('resetRotation');
-            const autoRotateCheckbox = document.getElementById('autoRotate');
-            
-            let isDragging = false;
-            let previousMouseX = 0;
-            let previousMouseY = 0;
-            let rotateX = -20;
-            let rotateY = 30;
-            let autoRotate = false;
-            let autoRotateInterval;
-            
-            // تحديث دوران الكعكة
-            function updateCakeRotation() {
-                cake.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-            }
-            
-            // التدوير التلقائي
-            function startAutoRotate() {
-                if (autoRotate) {
-                    autoRotateInterval = setInterval(() => {
-                        rotateY += 1;
-                        updateCakeRotation();
-                    }, 50);
-                }
-            }
-            
-            function stopAutoRotate() {
-                clearInterval(autoRotateInterval);
-            }
-            
-            // أحداث السحب للتدوير
-            cake.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                previousMouseX = e.clientX;
-                previousMouseY = e.clientY;
-                stopAutoRotate();
-            });
-            
-            document.addEventListener('mousemove', (e) => {
-                if (isDragging) {
-                    const deltaX = e.clientX - previousMouseX;
-                    const deltaY = e.clientY - previousMouseY;
-                    
-                    rotateY += deltaX * 0.5;
-                    rotateX -= deltaY * 0.5;
-                    
-                    updateCakeRotation();
-                    
-                    previousMouseX = e.clientX;
-                    previousMouseY = e.clientY;
-                }
-            });
-            
-            document.addEventListener('mouseup', () => {
-                isDragging = false;
-                if (autoRotateCheckbox.checked) {
-                    startAutoRotate();
-                }
-            });
-            
-            // نفس الأحداث للشاشات التي تعمل باللمس
-            cake.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                previousMouseX = e.touches[0].clientX;
-                previousMouseY = e.touches[0].clientY;
-                stopAutoRotate();
-                e.preventDefault();
-            });
-            
-            document.addEventListener('touchmove', (e) => {
-                if (isDragging) {
-                    const deltaX = e.touches[0].clientX - previousMouseX;
-                    const deltaY = e.touches[0].clientY - previousMouseY;
-                    
-                    rotateY += deltaX * 0.5;
-                    rotateX -= deltaY * 0.5;
-                    
-                    updateCakeRotation();
-                    
-                    previousMouseX = e.touches[0].clientX;
-                    previousMouseY = e.touches[0].clientY;
-                    
-                    e.preventDefault();
-                }
-            });
-            
-            document.addEventListener('touchend', () => {
-                isDragging = false;
-                if (autoRotateCheckbox.checked) {
-                    startAutoRotate();
-                }
-            });
-            
-            // أزرار التحكم
-            rotateLeftBtn.addEventListener('click', () => {
-                rotateY -= 30;
-                updateCakeRotation();
-            });
-            
-            rotateRightBtn.addEventListener('click', () => {
-                rotateY += 30;
-                updateCakeRotation();
-            });
-            
-            resetRotationBtn.addEventListener('click', () => {
-                rotateX = -20;
-                rotateY = 30;
-                updateCakeRotation();
-            });
-            
-            autoRotateCheckbox.addEventListener('change', () => {
-                autoRotate = autoRotateCheckbox.checked;
-                if (autoRotate) {
-                    startAutoRotate();
-                } else {
-                    stopAutoRotate();
-                }
-            });
-            
-            // تهيئة أولية
-            updateCakeRotation();
+    <div class="card">
+      <button id="toggleRotate" class="ghost">إيقاف الحركة</button>
+      <button id="confettiBtn">مفاجأة</button>
+    </div>
+  </div>
+</div>
+
+<div class="centerText">
+  <h1 id="greeting">كل سنة وأنتِ طيبة يا أميمة 🎂</h1>
+  <p id="sub">٢٥ سنة من الفرح — احتفلوا معنا!</p>
+</div>
+
+<div class="footer">
+  <div class="card">مرّر / اسحب لتدوير المشهد • كُن لطيفاً مع الصوت</div>
+</div>
+
+  </div>  <div class="playLarge">
+    <button id="playMusic">تشغيل موسيقى الاحتفال</button>
+  </div>  <div id="no-webgl">متصفحك لا يدعم WebGL. يمكنك تحديث المتصفح أو فتح هذه الصفحة على متصفح حديث لعرض التجربة ثلاثية الأبعاد.</div><audio id="bgMusic" loop src="" preload="none"></audio>
+
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.152.2/build/three.module.js';
+    import { OrbitControls } from 'https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js';
+    import { FontLoader } from 'https://unpkg.com/three@0.152.2/examples/jsm/loaders/FontLoader.js';
+    import { TextGeometry } from 'https://unpkg.com/three@0.152.2/examples/jsm/geometries/TextGeometry.js';
+
+    // Basic feature detection
+    if (!THREE.WEBGL.isWebGLAvailable()){
+      document.getElementById('no-webgl').style.display='block';
+      throw new Error('WebGL not supported');
+    }
+
+    // Scene setup
+    const container = document.getElementById('stage');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x071025);
+
+    const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.1, 2000);
+    camera.position.set(0, 6, 14);
+
+    const renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    renderer.setSize(innerWidth, innerHeight);
+    container.appendChild(renderer.domElement);
+
+    // Lights
+    const amb = new THREE.AmbientLight(0xffffff,0.45);
+    scene.add(amb);
+    const dir = new THREE.DirectionalLight(0xffffff,0.6);
+    dir.position.set(5,10,7); scene.add(dir);
+
+    // Floor reflection plane
+    const floorGeo = new THREE.PlaneGeometry(60,60);
+    const floorMat = new THREE.MeshStandardMaterial({color:0x06060b,roughness:0.7,metalness:0.0});
+    const floor = new THREE.Mesh(floorGeo,floorMat); floor.rotation.x = -Math.PI/2; floor.position.y = -1.8; scene.add(floor);
+
+    // Cake group
+    const cake = new THREE.Group();
+
+    function makeTier(radius,height,color,y){
+      const geo = new THREE.CylinderGeometry(radius, radius, height, 64);
+      const mat = new THREE.MeshStandardMaterial({color,roughness:0.5,metalness:0.05});
+      const mesh = new THREE.Mesh(geo,mat); mesh.position.y = y; return mesh;
+    }
+
+    // default colors
+    let cakeColor = 0xff9a9e;
+
+    const tier1 = makeTier(3.6,1.4,cakeColor,0.0);
+    const tier2 = makeTier(2.6,1.2,0xffffff,1.3);
+    const tier3 = makeTier(1.6,0.9,cakeColor,2.3);
+    cake.add(tier1,tier2,tier3);
+
+    // icing as rings (thin torus)
+    const icingTop = new THREE.TorusGeometry(1.7,0.18,16,100);
+    const icingMat = new THREE.MeshStandardMaterial({color:0xfff3e0,roughness:0.35});
+    const icing = new THREE.Mesh(icingTop,icingMat); icing.rotation.x = Math.PI/2; icing.position.y = 2.75; cake.add(icing);
+
+    // candles
+    const candles = new THREE.Group();
+    const candleGeom = new THREE.CylinderGeometry(0.08,0.08,0.6,16);
+    const candleMat = new THREE.MeshStandardMaterial({color:0xffffff,metalness:0.1,roughness:0.6});
+
+    const flameGeom = new THREE.SphereGeometry(0.12,12,8);
+    const flameMat = new THREE.MeshBasicMaterial({color:0xffcc33});
+
+    const candlePositions = [-1.4,-0.7,0,0.7,1.4];
+    candlePositions.forEach((x,i)=>{
+      const c = new THREE.Mesh(candleGeom,candleMat);
+      c.position.set(x,3.05,0.6*Math.sin(i));
+      c.rotation.z = (Math.random()-0.5)*0.1;
+      const flame = new THREE.Mesh(flameGeom,flameMat);
+      flame.position.set(0,0.38,0); flame.scale.setScalar(1.0+Math.random()*0.2);
+      const light = new THREE.PointLight(0xffc87c,0.6,6,2);
+      light.position.set(c.position.x,c.position.y+0.35,c.position.z);
+      c.add(flame);
+      candles.add(c);
+      candles.add(light);
+    });
+    cake.add(candles);
+
+    // 3D number "25" using FontLoader
+    const loader = new FontLoader();
+    loader.load('https://unpkg.com/three@0.152.2/examples/fonts/helvetiker_regular.typeface.json', (font)=>{
+      const txtGeo = new TextGeometry('٢٥',{
+        font:font, size:0.9, height:0.18, curveSegments:12, bevelEnabled:true, bevelThickness:0.02, bevelSize:0.02
+      });
+      txtGeo.computeBoundingBox();
+      const txtMat = new THREE.MeshStandardMaterial({color:0xffe08a,metalness:0.3,roughness:0.4});
+      const txt = new THREE.Mesh(txtGeo,txtMat);
+      const box = txtGeo.boundingBox;
+      const xOffset = -0.5*(box.max.x - box.min.x);
+      txt.position.set(xOffset,3.6,0);
+      txt.rotation.y = -0.1;
+      cake.add(txt);
+    });
+
+    // Add cake to scene
+    cake.position.y = -0.2;
+    scene.add(cake);
+
+    // Particles (soft floating lights)
+    const partCount = 160;
+    const partGeo = new THREE.BufferGeometry();
+    const pos = new Float32Array(partCount*3);
+    for(let i=0;i<partCount;i++){
+      pos[i*3+0] = (Math.random()-0.5)*18;
+      pos[i*3+1] = Math.random()*8 - 1;
+      pos[i*3+2] = (Math.random()-0.5)*18;
+    }
+    partGeo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+    const partMat = new THREE.PointsMaterial({size:0.05,transparent:true,opacity:0.9});
+    const particles = new THREE.Points(partGeo,partMat); scene.add(particles);
+
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; controls.enablePan = false; controls.minDistance = 6; controls.maxDistance = 30; controls.maxPolarAngle = Math.PI/2.1;
+
+    // Animation
+    let rotating = true;
+    const clock = new THREE.Clock();
+
+    function animate(){
+      const t = clock.getElapsedTime();
+      if(rotating) cake.rotation.y = t*0.25;
+      particles.rotation.y = -t*0.02;
+
+      // candle flame flicker: scale and light intensity
+      candles.children.forEach((child)=>{
+        if(child.type === 'Mesh' && child.geometry.type === 'SphereGeometry'){
+          const s = 1 + Math.sin(t*10 + Math.random()*3)*0.06;
+          child.scale.setScalar(s);
+        }
+        if(child.type === 'PointLight'){
+          child.intensity = 0.5 + Math.sin(t*8 + Math.random()*5)*0.2;
+        }
+      });
+
+      controls.update();
+      renderer.render(scene,camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Resize
+    window.addEventListener('resize', ()=>{
+      camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight);
+    });
+
+    // UI interactions
+    const cakeColorInput = document.getElementById('cakeColor');
+    cakeColorInput.addEventListener('input', (e)=>{
+      cakeColor = new THREE.Color(e.target.value).getHex();
+      tier1.material.color.setHex(cakeColor);
+      tier3.material.color.setHex(cakeColor);
+    });
+
+    document.getElementById('toggleRotate').addEventListener('click', (e)=>{
+      rotating = !rotating; e.target.textContent = rotating ? 'إيقاف الحركة' : 'تشغيل الحركة';
+    });
+
+    // Confetti simple implementation: spawn DOM confetti elements
+    document.getElementById('confettiBtn').addEventListener('click', ()=>{
+      launchConfetti();
+    });
+
+    function launchConfetti(){
+      const count = 60;
+      for(let i=0;i<count;i++){
+        const el = document.createElement('div');
+        el.style.position='fixed'; el.style.width='10px'; el.style.height='14px';
+        el.style.left = (50 + (Math.random()-0.5)*60) + '%';
+        el.style.top = (0 + Math.random()*30) + '%';
+        el.style.background = `hsl(${Math.random()*360},85%,60%)`;
+        el.style.opacity='0.95'; el.style.borderRadius='2px'; el.style.pointerEvents='none';
+        el.style.transform = `translateY(0) rotate(${Math.random()*360}deg)`;
+        el.style.transition = `transform 2.6s cubic-bezier(.2,.8,.2,1), opacity 2.6s`;
+        document.body.appendChild(el);
+        requestAnimationFrame(()=>{
+          el.style.transform = `translateY(120vh) rotate(${Math.random()*1080}deg)`;
+          el.style.opacity='0';
         });
-    </script>
-</body>
+        setTimeout(()=>el.remove(),3000+Math.random()*800);
+      }
+    }
+
+    // Music
+    const bg = document.getElementById('bgMusic');
+    const playBtn = document.getElementById('playMusic');
+    // default celebratory track (royalty-free short melody hosted as data URI placeholder)
+    // You can replace src with a URL to an mp3 file. Autoplay blocked on many browsers — user must press.
+    bg.src = 'https://cdn.jsdelivr.net/gh/anars/blank-audio@master/2sec.mp3';
+    playBtn.addEventListener('click', async ()=>{
+      try{ await bg.play(); playBtn.textContent='إيقاف الموسيقى'; playBtn.onclick = ()=>{ bg.pause(); playBtn.textContent='تشغيل موسيقى الاحتفال'; }}catch(e){ alert('المتصفح منع التشغيل التلقائي. اضغط تشغيل مرة أخرى.'); }
+    });
+
+    // Personalization: change greeting
+    const greeting = document.getElementById('greeting');
+    greeting.addEventListener('dblclick', ()=>{
+      const name = prompt('أدخل اسم الشخص (مثلاً: أميمة)',['أميمة']);
+      if(name) greeting.textContent = `كل سنة وأنتِ طيبة يا ${name} 🎂`;
+    });
+
+    // Small accessibility: keyboard toggle rotation with space
+    window.addEventListener('keydown',(e)=>{ if(e.code==='Space'){ e.preventDefault(); rotating=!rotating; document.getElementById('toggleRotate').textContent = rotating ? 'إيقاف الحركة' : 'تشغيل الحركة'; } });
+
+    // Helper: let user download a PNG snapshot
+    function downloadSnapshot(){
+      renderer.domElement.toBlob(blob=>{
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href=url; a.download = 'oumima-25.png'; a.click(); URL.revokeObjectURL(url);
+      });
+    }
+
+    // Add context menu quick actions
+    window.addEventListener('contextmenu', (e)=>{
+      e.preventDefault();
+      const action = confirm('نسخة صورة للتهنئة؟ اضغط موافق لحفظ لقطة الشاشة.');
+      if(action) downloadSnapshot();
+    });
+
+    // Optional: let user customize default text or cake details by URL params
+    const params = new URLSearchParams(location.search);
+    if(params.get('name')) greeting.textContent = `كل سنة وأنتِ طيبة يا ${params.get('name')} 🎂`;
+    if(params.get('age')) document.getElementById('sub').textContent = `${params.get('age')} سنة من الفرح — احتفلوا معنا!`;
+
+    // Small polish: gentle camera intro animation
+    const startTime = performance.now();
+    const startPos = {z:18,y:10};
+    function intro(){
+      const now = performance.now(); const p = Math.min((now-startTime)/1100,1);
+      camera.position.z = startPos.z - (startPos.z - 14)*(p);
+      camera.position.y = startPos.y - (startPos.y - 6)*(p);
+      if(p<1) requestAnimationFrame(intro);
+    }
+    intro();
+
+  </script>  <!-- Notes for editing: double-click greeting to edit text, use color input to change cake color, right-click to save snapshot --></body>
 </html>
